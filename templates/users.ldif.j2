@@ -1,7 +1,7 @@
 {% set ldap_domain = 'dc={},dc={}'.format(openldap_server_domain_name.split('.')[0],openldap_server_domain_name.split('.')[1]) %}
 {% if openldap_server_groups %}
 {% for group, users in openldap_server_groups.items() -%}
-dn: cn={{ group }},ou=Group,{{ ldap_domain }}
+dn: cn={{ group }},ou=Groups,{{ ldap_domain }}
 objectClass: groupOfNames
 cn: {{ group }}
 {% for user in users %}

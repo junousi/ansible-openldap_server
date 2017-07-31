@@ -18,6 +18,7 @@ objectClass: inetOrgPerson
 cn: {{ user }}
 sn: {{ user }}
 userPassword: {{ config['password'] }}
+uidNumber: {{ config['uidnumber'] }}
 
 {% endfor %}
 {% endif %}

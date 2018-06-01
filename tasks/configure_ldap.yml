@@ -45,14 +45,14 @@
   register: domain_copy
 
 - name: hax
-  shell: systemctl slapd stop
+  shell: systemctl stop slapd
 - shell: slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d -u
 - shell: rm /var/run/openldap/{slapd.pid,slapd.args}
 - shell: rm /var/run/slapd.pid
 - shell: rm /var/lib/ldap/{__db.001,__db.002,__db.003,__db.004,__db.005,__db.006,alock}
 - shell: sudo chown -R ldap:ldap /var/lib/ldap
 - shell: sudo chown -R ldap:ldap /etc/openldap/slapd.d
-- shell: systemctl slapd start
+- shell: systemctl start slapd
 
 - name: add the base domain
   when: domain_copy.changed

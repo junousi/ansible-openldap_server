@@ -23,6 +23,8 @@
   no_log: true
   register: root_password
 
+- debug: msg="{{root_password.stdout}}"
+
 - name: Copy the slapd.conf configuration file for Redhat
   template: src=slapd.conf.j2 dest={{ openldap_server_app_path }}/slapd.conf
   when: ansible_os_family == "RedHat"

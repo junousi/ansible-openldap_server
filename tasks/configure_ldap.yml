@@ -37,6 +37,9 @@
   notify: 
    - restart slapd
 
+- name: hax
+  shell: sudo chown -R ldap:ldap /var/lib/ldap
+
 - name: start the slapd service
   service: name=slapd state=restarted enabled=yes
 

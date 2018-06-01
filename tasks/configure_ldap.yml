@@ -40,22 +40,22 @@
 - name: start the slapd service
   service: name=slapd state=restarted enabled=yes
 
-- name: Copy the template for creating base dn
-  template: src=domain.ldif.j2 dest={{ openldap_server_app_path }}/domain.ldif
-  register: domain_copy
-
 - name: hax
   shell: systemctl stop slapd
-- shell: slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d -u
 - shell: rm /var/run/openldap/{slapd.pid,slapd.args}
   ignore_errors: true
 - shell: rm /var/run/slapd.pid
   ignore_errors: true
 - shell: rm /var/lib/ldap/{__db.001,__db.002,__db.003,__db.004,__db.005,__db.006,alock}
   ignore_errors: true
+- shell: slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d -u
 - shell: sudo chown -R ldap:ldap /var/lib/ldap
 - shell: sudo chown -R ldap:ldap /etc/openldap/slapd.d
 - shell: systemctl start slapd
+
+- name: Copy the template for creating base dn
+  template: src=domain.ldif.j2 dest={{ openldap_server_app_path }}/domain.ldif
+  register: domain_copy
 
 - name: add the base domain
   when: domain_copy.changed

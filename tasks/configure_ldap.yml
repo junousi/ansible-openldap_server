@@ -39,6 +39,7 @@
 
 - name: hax
   shell: sudo chown -R ldap:ldap /var/lib/ldap
+- shell: sudo chown -R ldap:ldap /etc/openldap/slapd.d
 
 - name: start the slapd service
   service: name=slapd state=restarted enabled=yes
